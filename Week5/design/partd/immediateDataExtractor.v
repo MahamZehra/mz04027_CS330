@@ -16,9 +16,9 @@ end
 
   always @ (instruction)
     begin
-      case (instruction[6])
+      case (instruction[5])
         0: begin
-            case(instruction[5])
+          case(instruction[4])
               0: temp = instruction[31:20];
               1: temp = {instruction[31:25], instruction[11:7]};
             endcase
