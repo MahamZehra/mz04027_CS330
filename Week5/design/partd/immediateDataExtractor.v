@@ -16,16 +16,16 @@ end
 
   always @ (instruction)
     begin
-      case (instruction[5])
+      case (instruction[6])
         0: begin
-          case(instruction[4])
+          case(instruction[5])
               0: temp = instruction[31:20];
               1: temp = {instruction[31:25], instruction[11:7]};
             endcase
           end
         1: temp = {instruction[30:25], instruction[11:8]};
       endcase
-      case (temp[0])
+      case (temp[11])
         0: imm_data = {all0,temp};
         1: imm_data = {all1,temp};
       endcase
