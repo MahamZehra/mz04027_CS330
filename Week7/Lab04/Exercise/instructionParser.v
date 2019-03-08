@@ -6,14 +6,14 @@ module instructionParser
   output reg [4:0] rs2, reg [6:0] funct7
 );
  
-always @ (instruction)
-begin 
-  assign opcode = instruction[6:0];
-  assign rd = instruction[11:7];
-  assign funct3 = instruction[14:12];
-  assign rs1 = instruction[19:15];
-  assign rs2 = instruction[24:20];
-  assign funct7 = instruction[31:25];
- end
+	always @ (instruction)
+	begin 
+  		assign opcode = instruction[6:0];
+  		assign rd = instruction[11:7];
+  		assign funct3 = instruction[14:12];
+  		assign rs1 = instruction[19:15];
+  		assign rs2 = instruction[24:20];
+  		assign funct7 = instruction[31:25];
+	end
  
- endmodule
+endmodule
