@@ -49,8 +49,6 @@ module registerFile
   
   always @ (*)
   begin
-    ReadData1 <= Registers[RS1];
-    ReadData2 <= Registers[RS2];
     if (clk & RegWrite)
       Registers[RD] = WriteData;
     if (reset)

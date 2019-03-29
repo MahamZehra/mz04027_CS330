@@ -6,7 +6,7 @@ module Program_Counter
 );
 
 always @ (posedge clk)
-	if (reset = 1)
+	if (reset == 1)
 		PC_Out = 64'b0;
 	else
 		PC_Out = PC_In;

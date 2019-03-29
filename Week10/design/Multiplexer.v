@@ -1,8 +1,8 @@
-module multiplexer
+module Multiplexer
 (
-  input [3:0] a, [3:0] b,
+  input [63:0] a, [63:0] b,
   input sel,
-  output reg [3:0] data_out
+  output reg [63:0] data_out
 );
 
   always @ (sel or a or b)

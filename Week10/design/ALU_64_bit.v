@@ -5,7 +5,7 @@ module ALU_64_bit
   input CarryIn,
   input [3:0] ALUOp,
   output reg [63:0] Result,
-  output Zero;
+  output reg Zero
 );
 
   wire bFin = ~b;
@@ -31,7 +31,10 @@ module ALU_64_bit
 				  end
 	endcase
 	
-	assign Zero = Result
+	if (Result == 0)
+		Zero = 1;
+	else
+		Zero = 0;
 	end
 	
 endmodule				
