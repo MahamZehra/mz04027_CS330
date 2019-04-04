@@ -10,8 +10,8 @@ module Instruction_Memory
         begin
         memory[0] = 8'b10000011;
         memory[1] = 8'b00110100;
-        memory[2] = 8'b00000101;
-        memory[3] = 8'b00001111;
+        memory[2] = 8'b10000101;
+        memory[3] = 8'b00000010;
         memory[4] = 8'b10110011;
         memory[5] = 8'b10000100;
         memory[6] = 8'b10011010;
@@ -21,9 +21,9 @@ module Instruction_Memory
         memory[10] = 8'b00010100;
         memory[11] = 8'b00000000;
         memory[12] = 8'b00100011;
-        memory[13] = 8'b00111000;
+        memory[13] = 8'b00110100;
         memory[14] = 8'b10010101;
-        memory[15] = 8'b00001110;
+        memory[15] = 8'b00000010;
         end 
         
         always @ (Inst_Address)

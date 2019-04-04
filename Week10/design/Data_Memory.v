@@ -76,23 +76,25 @@ module Data_Memory
   DataMem[63] <= 8'b00111111;
   end
   
-  always @ (*)
+  always @ (posedge clk)
   begin
-	if (clk & MemWrite)
+	if (MemWrite == 1)
 	begin
-		DataMem[Mem_Addr + 4'b0] = Write_Data[7:0];
-		DataMem[Mem_Addr + 4'b1] = Write_Data[15:8];
-		DataMem[Mem_Addr + 4'b10] = Write_Data[23:16];
-		DataMem[Mem_Addr + 4'b11] = Write_Data[31:24];
-		DataMem[Mem_Addr + 4'b100] = Write_Data[39:32];
-		DataMem[Mem_Addr + 4'b101] = Write_Data[47:40];
-		DataMem[Mem_Addr + 4'b110] = Write_Data[55:48];
-		DataMem[Mem_Addr + 4'b111] = Write_Data[63:56];
+		DataMem[Mem_Addr + 64'b0] = Write_Data[7:0];
+		DataMem[Mem_Addr + 64'b1] = Write_Data[15:8];
+		DataMem[Mem_Addr + 64'b10] = Write_Data[23:16];
+		DataMem[Mem_Addr + 64'b11] = Write_Data[31:24];
+		DataMem[Mem_Addr + 64'b100] = Write_Data[39:32];
+		DataMem[Mem_Addr + 64'b101] = Write_Data[47:40];
+		DataMem[Mem_Addr + 64'b110] = Write_Data[55:48];
+		DataMem[Mem_Addr + 64'b111] = Write_Data[63:56];
 	end
-	if (MemRead)
-	begin
-		Read_Data = {DataMem[Mem_Addr + 4'b111],DataMem[Mem_Addr + 4'b110],DataMem[Mem_Addr + 4'b101],DataMem[Mem_Addr + 4'b100],DataMem[Mem_Addr + 4'b0011],DataMem[Mem_Addr + 4'b0010], DataMem[Mem_Addr + 4'b0001], DataMem[Mem_Addr]};
-	end
-  end
+ end
+ 
+ always @ (Mem_Addr)
+ begin
+	if (MemRead == 1)
+		Read_Data = {DataMem[Mem_Addr + 64'b111],DataMem[Mem_Addr + 64'b110],DataMem[Mem_Addr + 64'b101],DataMem[Mem_Addr + 64'b100],DataMem[Mem_Addr + 64'b0011],DataMem[Mem_Addr + 64'b0010], DataMem[Mem_Addr + 64'b0001], DataMem[Mem_Addr]};
+ end
 
 endmodule

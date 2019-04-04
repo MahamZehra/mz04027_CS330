@@ -12,13 +12,13 @@ module tb();
 	initial
 	begin
 	clk = 1'b0;
-	reset = 1'b0;
+	reset = 1'b1;
 	end
 
 	always
-	#5 clk = ~clk;
+	#3 clk = ~clk;
 	
 	always
-	#50 reset = ~reset;
+	#10 reset = ~reset;
 
 endmodule

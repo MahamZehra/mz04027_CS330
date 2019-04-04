@@ -33,7 +33,7 @@ module RISC_V_Processor
 	Adder addInstruction
 	(
 		.a(PC_Out),
-		.b(64'd4),
+		.b(64'b100),
 		.out(tempOut)
 	);
   
@@ -134,7 +134,7 @@ module RISC_V_Processor
 	ALU_64_bit ALUCal
 	(
 		.a(ReadData1),
-		.b(ReadData2),
+		.b(data_out1),
 		.CarryIn(CarryIn),
 		.ALUOp(Operation),
 		.Result(Result),
