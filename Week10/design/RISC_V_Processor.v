@@ -16,11 +16,11 @@ module RISC_V_Processor
 	wire [63:0] ReadData2;
 	wire Branch;
 	wire MemRead;
-    	wire MemtoReg;
-    	wire MemWrite;
-    	wire ALUSrc;
+    wire MemtoReg;
+   	wire MemWrite;
+   	wire ALUSrc;
 	wire RegWrite;
-    	wire [1:0] ALUOp;
+   	wire [1:0] ALUOp;
 	wire [3:0] Operation;
 	wire [63:0] imm_data;
 	wire [63:0] data_out1;
@@ -30,10 +30,10 @@ module RISC_V_Processor
 	wire [63:0] WriteData;
 	wire [63:0] nextOut;
 	
-	Adder ADD
+	Adder addInstruction
 	(
 		.a(PC_Out),
-		.b(64'b100),
+		.b(64'd4),
 		.out(tempOut)
 	);
   
@@ -49,6 +49,12 @@ module RISC_V_Processor
 	(
 		.Inst_Address(PC_Out),
 		.Instruction(instruction)
+	);
+	
+	immediateDataExtractor IDE
+	(
+		.instruction(instruction),
+		.imm_data(imm_data)
 	);
 	
 	wire [63:0] Jump = imm_data << 1;
@@ -113,12 +119,6 @@ module RISC_V_Processor
 		.clk(clk),
 		.reset(reset),
 		.RegWrite(RegWrite)
-	);
-	
-	immediateDataExtractor IDE
-	(
-		.instruction(instruction),
-		.imm_data(imm_data)
 	);
 	
 	Multiplexer muxData

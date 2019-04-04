@@ -5,10 +5,13 @@ module Program_Counter
   output reg [63:0] PC_Out
 );
 
+always @ (reset)
+	PC_Out = 64'b0;
+	
 always @ (posedge clk)
-	if (reset == 1)
-		PC_Out = 64'b0;
-	else
+begin
+	if (reset == 0)
 		PC_Out = PC_In;
+end
 
 endmodule
