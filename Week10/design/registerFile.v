@@ -47,10 +47,14 @@ module registerFile
   Registers[31] <= 64'b00000000000000000000000000000000000000000000000000000000011111;
   end
   
-  always @ (*)
+  always @ (posedge clk)
   begin
-    if (clk & RegWrite)
+    if (RegWrite)
       Registers[RD] = WriteData;
+  end
+
+ always @ (RS1,RS2, reset)
+ begin
     if (reset)
     begin 
       ReadData1 <= 64'b0;
@@ -61,7 +65,7 @@ module registerFile
       ReadData1 <= Registers[RS1];
       ReadData2 <= Registers[RS2];
     end 
-  end
+ end
   
 endmodule
 

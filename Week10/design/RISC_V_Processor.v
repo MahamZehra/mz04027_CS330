@@ -57,16 +57,14 @@ module RISC_V_Processor
 		.imm_data(imm_data)
 	);
 	
-	wire [63:0] Jump = imm_data << 1;
-	
 	Adder addJump
 	(
 		.a(PC_Out),
-		.b(Jump),
+		.b(imm_data << 1),
 		.out(tempOut2)
 	);
 	
-	wire JumpSel = Branch && Zero;
+	wire JumpSel = Branch & Zero;
 	
 	Multiplexer muxJump
 	(
@@ -99,7 +97,7 @@ module RISC_V_Processor
 		.ALUOp(ALUOp)
 	);
 	
-	wire [3:0] Funct = instruction[30] + instruction[14] + instruction[13] + instruction[12];
+	wire [3:0] Funct = {instruction[30],instruction[14],instruction[13],instruction[12]};
 	
 	ALU_Control ALUCon
 	(
@@ -129,6 +127,16 @@ module RISC_V_Processor
 		.data_out(data_out1)
 	);
 	
+	Data_Memory DM
+	(
+		.Mem_Addr(Result),
+		.Write_Data(ReadData2),
+		.clk(clk),
+		.MemWrite(MemWrite),
+		.MemRead(MemRead),
+		.Read_Data(Read_Data)
+	);
+	
 	wire CarryIn = Operation[2];
 	
 	ALU_64_bit ALUCal
@@ -141,16 +149,6 @@ module RISC_V_Processor
 		.Zero(Zero)
 	);
 	
-	Data_Memory DM
-	(
-		.Mem_Addr(Result),
-		.Write_Data(ReadData2),
-		.clk(clk),
-		.MemWrite(MemWrite),
-		.MemRead(MemRead),
-		.Read_Data(Read_Data)
-	);
-	
 	Multiplexer muxStore
 	(
 		.a(Result),
@@ -158,7 +156,5 @@ module RISC_V_Processor
 		.sel(MemtoReg),
 		.data_out(WriteData)
 	);
-	
-	
   
 endmodule

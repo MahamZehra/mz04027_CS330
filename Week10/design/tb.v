@@ -10,15 +10,15 @@ module tb();
 	);
 
 	initial
-	begin
 	clk = 1'b0;
+	
+	initial
+	begin
 	reset = 1'b1;
+	#10 reset = ~reset;
 	end
 
 	always
-	#3 clk = ~clk;
-	
-	always
-	#10 reset = ~reset;
+	#5 clk = ~clk;
 
 endmodule

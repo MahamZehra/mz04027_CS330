@@ -76,7 +76,7 @@ module Data_Memory
   DataMem[63] <= 8'b00111111;
   end
   
-  always @ (posedge clk)
+  always @ (posedge clk & (Write_Data || Mem_Addr))
   begin
 	if (MemWrite == 1)
 	begin
